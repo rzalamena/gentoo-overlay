@@ -1,0 +1,25 @@
+Fix compilation warning:
+
+  In file included from object_heap.c:21:
+  object_heap.c: In function 'object_heap_allocate_unlocked':
+  sysdeps.h:52:13: warning: implicit declaration of function 'vdpau_error_message' [-Wimplicit-function-declaration]
+     52 |             vdpau_error_message("Assertion failed in file %s at line %d\n", \
+        |             ^~~~~~~~~~~~~~~~~~~
+  object_heap.c:128:5: note: in expansion of macro 'ASSERT'
+    128 |     ASSERT(heap->next_free >= 0);
+        |     ^~~~~~
+
+diff --git a/src/object_heap.c b/src/object_heap.c
+index 96b8cb6..ed2ba3b 100644
+--- a/src/object_heap.c
++++ b/src/object_heap.c
+@@ -22,6 +22,9 @@
+ #include <pthread.h>
+ #include "object_heap.h"
+ 
++#define DEBUG 1
++#include "debug.h"
++
+ /* This code is:
+  * Copyright (c) 2007 Intel Corporation. All Rights Reserved.
+  *
