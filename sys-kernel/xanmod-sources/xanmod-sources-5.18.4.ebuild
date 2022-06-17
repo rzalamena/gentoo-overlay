@@ -4,7 +4,7 @@
 EAPI="7"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
-K_GENPATCHES_VER="18"
+K_GENPATCHES_VER="7"
 UNIPATCH_LIST+=" ${DISTDIR}/patch-${PV}-xanmod1.xz "
 K_SECURITY_UNSUPPORTED="1"
 
@@ -28,17 +28,20 @@ SRC_URI="
 "
 
 src_unpack() {
-	# Remove patch version since XanMod includes it.
+	# Remove patch version since XanMod includes it
 	UNIPATCH_EXCLUDE=""
 	for patchver in $(seq 1 ${KV_PATCH}); do
 		base=$(expr 1000 + $(expr ${patchver} - 1))
 		UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} ${base}_linux-${KV_MAJOR}.${KV_MINOR}.${patchver}.patch"
 	done
 
-	# Proceed as usual.
+	# Remove patch already available
+	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 1950_cifs-fix-minor-compile-warning.patch"
+
+	# Proceed as usual
 	kernel-2_src_unpack
 
-	# Reset extra version string.
+	# Reset extra version string
 	sed -i -r 's/EXTRAVERSION = .+/EXTRAVERSION = /' ${S}/Makefile
 }
 
