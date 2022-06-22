@@ -4,6 +4,7 @@
 EAPI=8
 
 VALA_MIN_API_VERSION=0.24
+
 inherit autotools gnome2 vala
 
 DESCRIPTION="Plank the simplest dock on the planet"

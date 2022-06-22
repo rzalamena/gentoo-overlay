@@ -4,6 +4,7 @@
 EAPI=8
 
 VALA_MIN_API_VERSION=0.24
+
 inherit gnome2 meson vala
 
 DESCRIPTION="Global Menu for Vala Panel (and xfce4-panel and mate-panel)"

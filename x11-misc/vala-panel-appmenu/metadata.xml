@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Rafael Zalamena</name>
+		<email>rzalamena@gmail.com</email>
+	</maintainer>
+	<use>
+		<flag name="bamf">Wrapper library to simplify window matching</flag>
+		<flag name="mate">Mate panel support</flag>
+		<flag name="xfce">XFCE panel support</flag>
+	</use>
+</pkgmetadata>

@@ -4,15 +4,17 @@
 EAPI=8
 
 VALA_MIN_API_VERSION=0.24
+
 inherit autotools vala
 
-DESCRIPTION="Removes the headache of applications matching into a simple DBus daemon and c wrapper library."
+DESCRIPTION="Wrapper library to simplify window matching"
 HOMEPAGE="https://launchpad.net/bamf"
 SRC_URI="https://launchpad.net/bamf/0.5/${PV}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+IUSE="introspection"
 
 DEPEND="
 	$(vala_depend)
@@ -21,7 +23,6 @@ DEPEND="
 	>=x11-libs/libwnck-3.4.7
 "
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 src_prepare() {
 	default
@@ -32,6 +33,7 @@ src_prepare() {
 src_configure() {
 	local econfargs=(
 		VALA_API_GEN="${VAPIGEN}"
+		$(use_enable introspection)
 	)
 	econf "${econfargs[@]}" "$@" || die
 }

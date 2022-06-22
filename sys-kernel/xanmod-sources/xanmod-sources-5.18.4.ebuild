@@ -1,11 +1,12 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
+
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras"
 K_GENPATCHES_VER="7"
-UNIPATCH_LIST+=" ${DISTDIR}/patch-${PV}-xanmod1.xz "
+UNIPATCH_LIST="${UNIPATCH_LIST} ${DISTDIR}/patch-${PV}-xanmod1.xz "
 K_SECURITY_UNSUPPORTED="1"
 
 inherit kernel-2
@@ -14,17 +15,14 @@ detect_arch
 
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 HOMEPAGE="https://xanmod.org"
-IUSE=""
-LICENSE+=" CDDL"
+LICENSE="${LICENSE} CDDL"
 
-DESCRIPTION="
-  Full sources including the Gentoo patchset for the ${KV_MAJOR}.${KV_MINOR}
-  kernel tree and XanMod patches"
+DESCRIPTION="Linux source with XanMod and Gentoo patchset"
 SRC_URI="
-  ${KERNEL_URI}
-  ${GENPATCHES_URI}
-  ${ARCH_URI}
-  https://github.com/xanmod/linux/releases/download/${OKV}-xanmod1/patch-${OKV}-xanmod1.xz
+	${KERNEL_URI}
+	${GENPATCHES_URI}
+	${ARCH_URI}
+	https://github.com/xanmod/linux/releases/download/${OKV}-xanmod1/patch-${OKV}-xanmod1.xz
 "
 
 src_unpack() {
@@ -38,11 +36,14 @@ src_unpack() {
 	# Remove patch already available
 	UNIPATCH_EXCLUDE="${UNIPATCH_EXCLUDE} 1950_cifs-fix-minor-compile-warning.patch"
 
-	# Proceed as usual
 	kernel-2_src_unpack
+}
 
+src_prepare() {
 	# Reset extra version string
-	sed -i -r 's/EXTRAVERSION = .+/EXTRAVERSION = /' ${S}/Makefile
+	sed -i -r 's/EXTRAVERSION = .+/EXTRAVERSION = /' "${S}/Makefile"
+
+	kernel-2_src_prepare
 }
 
 pkg_postinst() {
