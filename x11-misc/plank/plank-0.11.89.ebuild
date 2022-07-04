@@ -21,6 +21,7 @@ DEPEND="
 	>=x11-libs/bamf-0.5.0
 	>=gnome-base/gnome-menus-3.0
 	>=dev-libs/libgee-0.8
+	>=dev-libs/libdbusmenu-16.04
 "
 RDEPEND="${DEPEND}"
 BDEPEND="
