@@ -19,12 +19,11 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug opengl"
+IUSE="debug static-libs"
 
 RDEPEND="
-	>=x11-libs/libva-2.0:=[X,opengl?,${MULTILIB_USEDEP}]
+	>=x11-libs/libva-2.0:=[X,${MULTILIB_USEDEP}]
 	>=x11-libs/libvdpau-0.9[${MULTILIB_USEDEP}]
-	opengl? ( >=virtual/opengl-7.0-r1[${MULTILIB_USEDEP}] )
 "
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
@@ -39,8 +38,15 @@ src_prepare() {
 multilib_src_configure() {
 	local myeconfargs=(
 		$(use_enable debug)
-		$(use_enable opengl glx)
 	)
 
 	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
+}
+
+multilib_src_install_all() {
+	einstalldocs
+
+	if ! use static-libs ; then
+		find "${ED}" -type f -name "*.la" -delete || die
+	fi
 }
