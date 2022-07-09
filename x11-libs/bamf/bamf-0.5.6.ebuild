@@ -14,7 +14,7 @@ SRC_URI="https://launchpad.net/bamf/0.5/${PV}/+download/${P}.tar.gz"
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="introspection"
+IUSE="introspection static-libs"
 
 DEPEND="
 	$(vala_depend)
@@ -36,4 +36,11 @@ src_configure() {
 		$(use_enable introspection)
 	)
 	econf "${econfargs[@]}" "$@" || die
+}
+
+src_install() {
+	default
+	if ! use static-libs ; then
+		find "${ED}" -type f -name "*.la" -delete || die
+	fi
 }
