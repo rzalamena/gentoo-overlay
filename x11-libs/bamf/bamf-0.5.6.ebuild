@@ -21,6 +21,7 @@ DEPEND="
 	>=sys-apps/dbus-1.8
 	>=gnome-base/libgtop-2.0
 	>=x11-libs/libwnck-3.4.7
+	>=x11-libs/startup-notification-0.12
 "
 RDEPEND="${DEPEND}"
 
