@@ -6,9 +6,9 @@ EAPI="8"
 inherit autotools multilib-minimal
 
 DESCRIPTION="VDPAU Backend for Video Acceleration (VA) API"
-HOMEPAGE="https://gitlab.com/rzalamena/libva-vdpau-driver"
+HOMEPAGE="https://github.com/rzalamena/libva-vdpau-driver"
 
-SRC_URI="https://gitlab.com/rzalamena/${PN}/-/archive/${PV}/${P}.tar.bz2"
+SRC_URI="https://github.com/rzalamena/${PN}/archive/refs/tags/${PV}.tar.gz"
 KEYWORDS="~amd64 ~arm64 ~riscv ~x86"
 
 LICENSE="GPL-2"
@@ -16,7 +16,7 @@ SLOT="0"
 IUSE="debug static-libs"
 
 RDEPEND="
-	>=x11-libs/libva-2.0:=[X,${MULTILIB_USEDEP}]
+	>=media-libs/libva-2.0:=[X,${MULTILIB_USEDEP}]
 	>=x11-libs/libvdpau-0.9[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}"
