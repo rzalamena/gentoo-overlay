@@ -9,11 +9,11 @@ inherit autotools vala
 
 DESCRIPTION="Wrapper library to simplify window matching"
 HOMEPAGE="https://launchpad.net/bamf"
-SRC_URI="https://launchpad.net/bamf/0.5/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/bamf/$(ver_cut 1-2)/${PV}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="introspection static-libs"
 
 DEPEND="
