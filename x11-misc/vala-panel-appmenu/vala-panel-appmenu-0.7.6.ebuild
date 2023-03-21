@@ -22,7 +22,7 @@ DEPEND="
 	!bamf? ( >=x11-libs/libwnck-3.4.8 )
 	mate? ( >=mate-base/mate-panel-1.20 )
 	xfce? ( >=xfce-base/xfce4-panel-4.12 )
-	>=x11-libs/gtk+-3.22.0
+	>=x11-libs/gtk+-2.24:2
 "
 RDEPEND="${RDEPEND}"
 BDEPEND="
